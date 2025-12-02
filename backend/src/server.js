@@ -1,15 +1,23 @@
 import express from "express";
-import dotenv from "dotenv";
-
-dotenv.config();
+import path from "path";
+import { ENV } from "./config/env.js";
 
 const app = express();
+
+const __dirname = path.resolve();
+
+app.use(express.json());
 
 app.get("/api/health", (req, res) => {
   res.status(200).json({ message: "Success" });
 });
 
-app.listen(3000, () => console.log("Server running on port 3000"));
-// app.listen(process.env.PORT, () =>
-//   console.log(`Server running on port ${process.env.PORT}`)
-// );
+if (ENV.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../admin/dist")));
+
+  app.get("/{*any}", (req, res) => {
+    res.sendFile(path.join(__dirname, "../admin", "dist", "index.html"));
+  });
+}
+
+app.listen(ENV.PORT, () => console.log(`Server running on port ${ENV.PORT}`));
