@@ -10,5 +10,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@clerk/express": "^1.7.54",
+    "cloudinary": "^2.8.0",
+    "mongoose": "^9.0.0"
+  }
 }
