@@ -36,3 +36,6 @@ const deleteUserFromDB = inngest.createFunction(
 );
 
 export const functions = [syncUser, deleteUserFromDB];
+
+// add the url/app/ingest in ingest
+// add varibles to sevalla
